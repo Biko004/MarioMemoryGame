@@ -161,7 +161,7 @@ function click(e){
             one = e.target;
             chosenCard = 1;
         }
-        else{
+        else if(one != e.target){
             two = e.target;
             chosenCard = 2;
             control();
