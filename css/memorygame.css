@@ -6,10 +6,8 @@
 .container{
     text-align: center;
 }
-
-.justSize{
-    opacity: 0;
-    background-image: url("../images/sideA1.jpg");
+.header{
+    min-height: 20%;
 }
 #modallogo {
     width: 50%;
@@ -27,6 +25,7 @@ body {
     display: inline-block;
     margin: 0;
     width: 100%;
+    min-height: 100%;
 }
 .row{
     display: inline-block;
@@ -217,4 +216,13 @@ body {
     border: 2px solid black;
     border-radius: 6px;
 
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.game{
+    min-height: 100%;
 }
