@@ -11,16 +11,28 @@
 <div class="container">
     <img src="images/mario.png" id="logo">
     <h1>MEMORY GAME</h1>
-    <div class="topbar">
-        <h2 id="startover" onclick="reload()">NEW GAME</h2>
-        <h2 id="wrong">?</h2>
-    </div>
-
+    <h2 class="btn cool" id="startover" onclick="reload()">NEW GAME</h2>
 </div>
+<div class="topbar container">
+    <h2 id="wrong">?</h2>
+</div>
+
+<!--<div class="topbar pagination-centered text-center">-->
+    <!--<div class="row">-->
+        <!--<div class=".col-xs-4 col-sm-4 col-md-4"></div>-->
+        <!--<div class=".col-xs-4 col-sm-4 col-md-4"><h2 class="btn cool" id="startover" onclick="reload()">NEW GAME</h2>-->
+        <!--</div>-->
+
+        <!--<div class=".col-xs-4 col-sm-4 col-md-4"><h2 id="wrong">?</h2></div>-->
+    <!--</div>-->
+
+<!--</div>-->
+
 
 <div class="container">
     <!-- Trigger the modal with a button -->
-    <button type="button" class="btn btn-info btn-lg" id="popup"  data-toggle="modal" data-target="#myModal">Open Modal</button>
+    <button type="button" class="btn btn-info btn-lg" id="popup" data-toggle="modal" data-target="#myModal">Open Modal
+    </button>
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
@@ -29,14 +41,17 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
+                    <h4 class="modal-title">YOU WON!</h4>
                     <img id="winner" src="images/winner1.gif">
                 </div>
                 <div class="modal-body">
-                    <h4 class="modal-title">YOU WON!</h4>
+                    <h3 id="results"></h3>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default cool"  onclick="reload()" data-dismiss="modal">New Game</button>
+                    <button type="button" class="btn btn-default cool" onclick="reload()" data-dismiss="modal">New
+                        Game
+                    </button>
                 </div>
             </div>
 

@@ -44,6 +44,9 @@ function winner() {
     var popup = document.getElementById("popup");
     $("#popup").click();
 
+    var results = document.getElementById("results");
+    results.textContent = "Wrong Guesses: " + steps;
+
 
 }
 
