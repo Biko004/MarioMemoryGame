@@ -4,7 +4,30 @@ var backCard = "url(./images/sideA1.jpg)";
 var trueChoice = 0;
 var steps = 0;
 var gamePaused = false;
+var level = "";
+var images = 6;
 
+$(window).load(function () {
+    $('#startgame').modal('show');
+});
+
+
+function start() {
+    var selectedForm = document.forms[0];
+    var selectedLevel = "";
+    var i;
+    for (i = 0; i < selectedForm.length; i++) {
+        if (selectedForm[i].checked) {
+            selectedLevel = selectedLevel + selectedForm[i].value;
+        }
+    }
+    console.log(selectedLevel);
+
+    $("#startgame").on('hidden.bs.modal', function () {
+        $(this).data('bs.modal', null);
+    });
+    level = selectedLevel;
+}
 
 
 function createBoard(){
@@ -14,15 +37,24 @@ function createBoard(){
     container.classList.add("container");
     container.classList.add("game");
 
+    var rows = 3;
+    if(level == "rookie"){
+        rows = 3;
+    }
+    else if(level == "intermidate"){
+        rows = 6;
+    }
+    else if(level == "advanced") {
+        rows = 8;
+    }
+
     for (var i=0; i<3; i++){
         var row = document.createElement("div");
         row.classList.add("row");
-        for (var j=0; j<4; j++){
+        for (var j=0; j<rows; j++){
             var col = document.createElement("div");
             col.classList.add("col-sm-3", "col-xs-3");
             col.classList.add("card");
-            col.classList.add("img");
-
             col.id = (3*j + i);
             col.style.backgroundImage = backCard;
             col.addEventListener("click", click);
@@ -32,6 +64,9 @@ function createBoard(){
         container.appendChild(row);
         container.appendChild(document.createElement('BR'));
     }
+
+
+
     document.body.appendChild(container);
 
 }
@@ -66,35 +101,52 @@ function score(){
 }
 
 // CREATING THE BOARD
-createBoard();
-
-score();
-// CREATING EMPTY ARRAY FOR IMAGES
 var faces = [];
-
-for (var i=0; i<6; i++){
+for (var i=0; i<=24; i++){
     faces.push("./images/" + (i+1) + ".jpg");
 }
+var selected = [];
+
+score();
+
+function randomizeImages(){
+
+
+    if(level == "rookie"){
+        images = 6;
+    }
+    else if(level == "intermidate"){
+        images = 9;
+    }
+    else if(level == "advanced") {
+        images = 12;
+    }
+    for (var i=0; i<images; i++){
+        faces.push("./images/" + (i+1) + ".jpg");
+    }
 
 
 // NEW ARRAY OF 2x EACH IMAGE
-var selected = [];
+
 
 //PUSHING EACH IMAGE TWICE
-for (var j = 0; j < 6; j++) {
-    var randomInd = Math.floor(Math.random(faces.length));
-    var face = faces[randomInd];
+    for (var j = 0; j < images; j++) {
+        var randomInd = Math.floor(Math.random(faces.length));
 
-    selected.push(face);
-    selected.push(face);
+        var face = faces[randomInd];
+
+        selected.push(face);
+        selected.push(face);
 
 // REMOVING THE CHOSEN IMAGE FROM THE FACES ARRAY
-    faces.splice(randomInd, 1);
+        faces.splice(randomInd, 1);
+    }
+
+    selected.sort(function() {
+        return 0.5 - Math.random();
+    });
 }
 
-selected.sort(function() {
-    return 0.5 - Math.random();
-});
 
 
 

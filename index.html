@@ -17,17 +17,6 @@
     <h2 id="wrong">?</h2>
 </div>
 
-<!--<div class="topbar pagination-centered text-center">-->
-    <!--<div class="row">-->
-        <!--<div class=".col-xs-4 col-sm-4 col-md-4"></div>-->
-        <!--<div class=".col-xs-4 col-sm-4 col-md-4"><h2 class="btn cool" id="startover" onclick="reload()">NEW GAME</h2>-->
-        <!--</div>-->
-
-        <!--<div class=".col-xs-4 col-sm-4 col-md-4"><h2 id="wrong">?</h2></div>-->
-    <!--</div>-->
-
-<!--</div>-->
-
 
 <div class="container">
     <!-- Trigger the modal with a button -->
@@ -59,16 +48,51 @@
     </div>
 
 </div>
-<audio id="levelup" src="audio/smb_1-up.wav"></audio>
-<audio id="winnerSound" src="audio/smb_stage_clear.wav"></audio>
+<div class="container startgame">
+    <!-- Trigger the modal with a button -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="startgame" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <img src="images/mario.png" id="modallogo">
+                    <h1>MEMORY GAME</h1>
+                </div>
+                <div class="modal-body" id="modalbox">
+
+                    <form>
+                        <input type="radio" class="level" id="radio1" value="rookie">
+                        <label for="radio1"> Rookie</label><br>
+                        <input type="radio" class="level" id="radio2" value="intermidate">
+                        <label for="radio2"> Intermidate</label><br>
+                        <input type="radio" class="level" id="radio3" value="advanced">
+                        <label for="radio3"> Advanced</label><br>
+                        </form>                </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default cool" onclick="start(); createBoard(); randomizeImages();" data-dismiss="modal">
+                                START
+                            </button>
+                        </div>
 
 
-<!-- Include all compiled plugins (below), or include individual files as needed -->
+            </div>
+        </div>
+
+    </div>
+</div>
+    <audio id="levelup" src="audio/smb_1-up.wav"></audio>
+    <audio id="winnerSound" src="audio/smb_stage_clear.wav"></audio>
 
 
-<script src="js/jquery.min.js"></script>
-<script src="js/memorygame.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/memorygame.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
