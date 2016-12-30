@@ -19,11 +19,9 @@
 
 <div class="container">
     <!-- Trigger the modal with a button -->
-    <button type="button" class="btn btn-info btn-lg" id="popup" data-toggle="modal" data-target="#myModal">Open Modal
-    </button>
 
     <!-- Modal -->
-    <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal fade" id="winnerAlert" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
@@ -62,16 +60,16 @@
                 </div>
                 <div class="modal-body" id="modalbox">
 
-                    <form>
-                        <input type="radio" class="level" id="radio1" value="rookie">
+                    <form name="levellist">
+                        <input type="radio" class="level" id="radio1" value="rookie" name="radioclick">
                         <label for="radio1"> Rookie</label><br>
-                        <input type="radio" class="level" id="radio2" value="intermidate">
+                        <input type="radio" class="level" id="radio2" value="intermidate" name="radioclick">
                         <label for="radio2"> Intermidate</label><br>
-                        <input type="radio" class="level" id="radio3" value="advanced">
+                        <input type="radio" class="level" id="radio3" value="advanced" name="radioclick">
                         <label for="radio3"> Advanced</label><br>
                         </form>                </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default cool" onclick="start(); createBoard(); randomizeImages();" data-dismiss="modal">
+                            <button type="button" class="btn btn-default cool" onclick="start();">
                                 START
                             </button>
                         </div>
@@ -92,6 +90,7 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/memorygame.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://cdn.rawgit.com/nnattawat/flip/master/dist/jquery.flip.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

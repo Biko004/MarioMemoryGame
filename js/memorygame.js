@@ -6,29 +6,66 @@ var steps = 0;
 var gamePaused = false;
 var level = "";
 var images = 6;
+var colNum = 3;
 
-$(window).load(function () {
-    $('#startgame').modal('show');
-});
 
+
+function windowLoad(){
+    $(window).load(function () {
+        $('#startgame').modal({
+            display: 'show',
+            backdrop: 'static',
+            keyboard: false  // to prevent closing with Esc button (if you want this too)
+        });
+
+    });
+};
+
+windowLoad();
+
+function checkOrientation(){
+    var orientation = screen.orientation || screen.mozOrientation || screen.msOrientation;
+
+    if (orientation.type === "landscape-primary") {
+        console.log("That looks good.");
+    } else if (orientation.type === "landscape-secondary") {
+        console.log("the screen is upside down!");
+    } else if (orientation.type === "portrait-secondary" || orientation.type === "portrait-primary") {
+        console.log("Mmmh... you should rotate your device to landscape to play my game!");
+
+    }
+}
+checkOrientation();
 
 function start() {
-    var selectedForm = document.forms[0];
-    var selectedLevel = "";
-    var i;
-    for (i = 0; i < selectedForm.length; i++) {
-        if (selectedForm[i].checked) {
-            selectedLevel = selectedLevel + selectedForm[i].value;
+
+
+    if($('input:radio:checked').length > 0){
+        var selectedForm = document.forms[0];
+        var selectedLevel = "";
+        var i;
+        for (i = 0; i < selectedForm.length; i++) {
+            if (selectedForm[i].checked) {
+                selectedLevel = selectedLevel + selectedForm[i].value;
+            }
         }
+        console.log(selectedLevel);
+        $('#startgame').modal('hide');
+
+        $("#startgame").on('hidden.bs.modal', function () {
+            $(this).data('bs.modal', null);
+        });
+        level = selectedLevel;
+
+        createBoard();
+        randomizeImages();
     }
-    console.log(selectedLevel);
+    else{
+        alert("Please pick a level.");
 
-    $("#startgame").on('hidden.bs.modal', function () {
-        $(this).data('bs.modal', null);
-    });
-    level = selectedLevel;
+    }
+
 }
-
 
 function createBoard(){
 
@@ -37,15 +74,18 @@ function createBoard(){
     container.classList.add("container");
     container.classList.add("game");
 
-    var rows = 3;
+    var rows = 4;
     if(level == "rookie"){
-        rows = 3;
+        rows = 4;
+        colNum = 3;
     }
     else if(level == "intermidate"){
         rows = 6;
+        colNum = 2;
     }
     else if(level == "advanced") {
         rows = 8;
+        colNum = 1;
     }
 
     for (var i=0; i<3; i++){
@@ -53,7 +93,7 @@ function createBoard(){
         row.classList.add("row");
         for (var j=0; j<rows; j++){
             var col = document.createElement("div");
-            col.classList.add("col-sm-3", "col-xs-3");
+            col.classList.add("col-xs-"+colNum);
             col.classList.add("card");
             col.id = (3*j + i);
             col.style.backgroundImage = backCard;
@@ -77,7 +117,10 @@ function winner() {
 
 
     var popup = document.getElementById("popup");
-    $("#popup").click();
+    $("#winnerAlert").modal({
+        backdrop: 'static',
+        keyboard: false
+    }).click();
 
     var results = document.getElementById("results");
     results.textContent = "Wrong Guesses: " + steps;
@@ -161,7 +204,7 @@ function click(e){
             one = e.target;
             chosenCard = 1;
         }
-        else{
+        else if(one!=e.target){
             two = e.target;
             chosenCard = 2;
             control();
@@ -216,3 +259,4 @@ function control(){
 var reload = function myFunction() {
     location.reload();
 };
+
