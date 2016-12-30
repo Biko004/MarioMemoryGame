@@ -6,8 +6,11 @@ var steps = 0;
 var gamePaused = false;
 var level = "";
 var images = 6;
+var colNum = 3;
 
-function levelCheck(){
+
+
+function windowLoad(){
     $(window).load(function () {
         $('#startgame').modal({
             display: 'show',
@@ -18,9 +21,21 @@ function levelCheck(){
     });
 };
 
-levelCheck();
+windowLoad();
 
+function checkOrientation(){
+    var orientation = screen.orientation || screen.mozOrientation || screen.msOrientation;
 
+    if (orientation.type === "landscape-primary") {
+        console.log("That looks good.");
+    } else if (orientation.type === "landscape-secondary") {
+        console.log("the screen is upside down!");
+    } else if (orientation.type === "portrait-secondary" || orientation.type === "portrait-primary") {
+        console.log("Mmmh... you should rotate your device to landscape to play my game!");
+
+    }
+}
+checkOrientation();
 
 function start() {
 
@@ -62,12 +77,15 @@ function createBoard(){
     var rows = 4;
     if(level == "rookie"){
         rows = 4;
+        colNum = 3;
     }
     else if(level == "intermidate"){
         rows = 6;
+        colNum = 2;
     }
     else if(level == "advanced") {
         rows = 8;
+        colNum = 1;
     }
 
     for (var i=0; i<3; i++){
@@ -75,7 +93,7 @@ function createBoard(){
         row.classList.add("row");
         for (var j=0; j<rows; j++){
             var col = document.createElement("div");
-            col.classList.add("col-sm-3", "col-xs-3");
+            col.classList.add("col-xs-"+colNum);
             col.classList.add("card");
             col.id = (3*j + i);
             col.style.backgroundImage = backCard;
@@ -241,3 +259,4 @@ function control(){
 var reload = function myFunction() {
     location.reload();
 };
+
